@@ -1,69 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My AI Study System</title>
+  <title>MAX AI Study System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
-      font-family: Arial;
-      padding: 20px;
-      background: #f4f6ff;
-    }
-    textarea {
-      width: 100%;
-      height: 150px;
-      margin-bottom: 10px;
-    }
-    button {
-      padding: 10px;
-      margin: 5px;
-      background: #4a6cff;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       color: white;
-      border: none;
-      cursor: pointer;
+      text-align: center;
     }
-    pre {
+
+    .container {
+      padding: 40px;
+    }
+
+    textarea {
+      width: 90%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 20px;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      background: #00c6ff;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
       background: white;
-      padding: 15px;
-      white-space: pre-wrap;
+      transform: scale(1.05);
+    }
+
+    #mainApp {
+      display: none;
+    }
+
+    .login-box {
+      margin-top: 100px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    h1 {
+      font-size: 40px;
+      text-shadow: 0 0 15px #00f7ff;
     }
   </style>
 </head>
+
 <body>
 
-<h1>My AI Study Generator</h1>
+<div class="login-box" id="loginBox">
+  <h1>MAX AI Secure Login</h1>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+</div>
 
-<textarea id="notes" placeholder="Paste your study notes here..."></textarea>
+<div id="mainApp" class="container">
+  <h1>❄ MAX AI Study Generator</h1>
 
-<button onclick="generatePrompt('summary')">Summary</button>
-<button onclick="generatePrompt('mind map')">Mind Map</button>
-<button onclick="generatePrompt('quiz')">Quiz</button>
-<button onclick="generatePrompt('flashcards')">Flashcards</button>
-<button onclick="generatePrompt('slides')">Slide Deck</button>
-<button onclick="generatePrompt('infographic')">Infographic</button>
-<button onclick="generatePrompt('table')">Data Table</button>
-<button onclick="generatePrompt('video script')">Video Review</button>
-<button onclick="generatePrompt('audio script')">Audio Review</button>
+  <textarea placeholder="Paste your study notes here..."></textarea><br>
 
-<h2>Copy This Prompt → Paste Into ChatGPT</h2>
-
-<pre id="output"></pre>
+  <button>Summary</button>
+  <button>Mind Map</button>
+  <button>Quiz</button>
+  <button>Flashcards</button>
+  <button>Slide Deck</button>
+  <button>Infographic</button>
+  <button>Data Table</button>
+  <button>Video Review</button>
+  <button>Audio Review</button>
+</div>
 
 <script>
-function generatePrompt(type) {
-  const notes = document.getElementById("notes").value;
+  const correctUsername = "Lokesh";
+  const correctPassword = "MAX1423";
 
-  const prompt = `
-You are an expert teacher.
+  function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
 
-From the following study material, create a high-quality ${type}.
-Make it clear, structured, and exam-focused.
-
-STUDY MATERIAL:
-${notes}
-`;
-
-  document.getElementById("output").innerText = prompt;
-}
+    if(user === correctUsername && pass === correctPassword){
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("mainApp").style.display = "block";
+    } else {
+      alert("Access Denied");
+    }
+  }
 </script>
 
 </body>
