@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My AI Study System</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f4f6ff;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px;
+      margin: 5px;
+      background: #4a6cff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    pre {
+      background: white;
+      padding: 15px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<h1>My AI Study Generator</h1>
+
+<textarea id="notes" placeholder="Paste your study notes here..."></textarea>
+
+<button onclick="generatePrompt('summary')">Summary</button>
+<button onclick="generatePrompt('mind map')">Mind Map</button>
+<button onclick="generatePrompt('quiz')">Quiz</button>
+<button onclick="generatePrompt('flashcards')">Flashcards</button>
+<button onclick="generatePrompt('slides')">Slide Deck</button>
+<button onclick="generatePrompt('infographic')">Infographic</button>
+<button onclick="generatePrompt('table')">Data Table</button>
+<button onclick="generatePrompt('video script')">Video Review</button>
+<button onclick="generatePrompt('audio script')">Audio Review</button>
+
+<h2>Copy This Prompt → Paste Into ChatGPT</h2>
+
+<pre id="output"></pre>
+
+<script>
+function generatePrompt(type) {
+  const notes = document.getElementById("notes").value;
+
+  const prompt = `
+You are an expert teacher.
+
+From the following study material, create a high-quality ${type}.
+Make it clear, structured, and exam-focused.
+
+STUDY MATERIAL:
+${notes}
+`;
+
+  document.getElementById("output").innerText = prompt;
+}
+</script>
+
+</body>
+</html>
