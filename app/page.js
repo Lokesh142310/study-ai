@@ -4,12 +4,13 @@ import { useState } from "react";
 export default function Home() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [mode, setMode] = useState("summary");
 
   const generateContent = async () => {
     const res = await fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: input })
+      body: JSON.stringify({ text: input, mode })
     });
 
     const data = await res.json();
@@ -17,52 +18,35 @@ export default function Home() {
   };
 
   return (
-    <div style={{ padding: "40px", textAlign: "center" }}>
-      <h1 style={{ fontSize: "40px" }}>MAX AI Study System</h1>
+    <div style={{ padding: 40 }}>
+      <h1>MAX AI Study System</h1>
 
       <textarea
         placeholder="Paste your notes..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        style={{
-          width: "80%",
-          height: "150px",
-          padding: "15px",
-          borderRadius: "15px",
-          border: "none",
-          backdropFilter: "blur(10px)",
-          background: "rgba(255,255,255,0.1)",
-          color: "white"
-        }}
+        style={{ width: "100%", height: 150 }}
       />
 
       <br /><br />
 
-      <button
-        onClick={generateContent}
-        style={{
-          padding: "12px 25px",
-          borderRadius: "12px",
-          border: "none",
-          background: "#00f5ff",
-          fontWeight: "bold",
-          cursor: "pointer"
-        }}
-      >
-        Generate AI Study Content
+      <select value={mode} onChange={(e) => setMode(e.target.value)}>
+        <option value="summary">Summary</option>
+        <option value="quiz">Quiz</option>
+        <option value="flashcards">Flashcards</option>
+        <option value="mindmap">Mind Map</option>
+        <option value="slides">Slide Deck</option>
+      </select>
+
+      <br /><br />
+
+      <button onClick={generateContent}>
+        Generate
       </button>
 
-      <div style={{
-        marginTop: "30px",
-        padding: "20px",
-        width: "80%",
-        marginInline: "auto",
-        borderRadius: "15px",
-        background: "rgba(255,255,255,0.1)",
-        backdropFilter: "blur(10px)"
-      }}>
+      <pre style={{ marginTop: 20 }}>
         {output}
-      </div>
+      </pre>
     </div>
   );
 }
