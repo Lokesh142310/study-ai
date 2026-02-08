@@ -23,5 +23,8 @@ export async function POST(req) {
     result = "Slide 1: Title\nSlide 2: Main Points\nSlide 3: Conclusion";
   }
 
-  return Response.json({ result });
+  return new Response(JSON.stringify({ result }), {
+  headers: { "Content-Type": "application/json" }
+});
+
 }
